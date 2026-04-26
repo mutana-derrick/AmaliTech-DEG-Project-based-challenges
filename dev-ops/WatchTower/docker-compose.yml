@@ -47,6 +47,7 @@ services:
     ports:
       - "${PROMETHEUS_PORT}:9090"
     volumes:
+      - ./prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
