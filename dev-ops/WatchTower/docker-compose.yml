@@ -1,0 +1,46 @@
+services:
+  order-service:
+    build:
+      context: ./app/order-service
+    container_name: ${ORDER_SERVICE_NAME}
+    ports:
+      - "${ORDER_SERVICE_PORT}:${ORDER_SERVICE_PORT}"
+    environment:
+      PORT: ${ORDER_SERVICE_PORT}
+      SERVICE_NAME: ${ORDER_SERVICE_NAME}
+    networks:
+      - watchtower-net
+    logging:
+      driver: json-file
+
+  tracking-service:
+    build:
+      context: ./app/tracking-service
+    container_name: ${TRACKING_SERVICE_NAME}
+    ports:
+      - "${TRACKING_SERVICE_PORT}:${TRACKING_SERVICE_PORT}"
+    environment:
+      PORT: ${TRACKING_SERVICE_PORT}
+      SERVICE_NAME: ${TRACKING_SERVICE_NAME}
+    networks:
+      - watchtower-net
+    logging:
+      driver: json-file
+
+  notification-service:
+    build:
+      context: ./app/notification-service
+    container_name: ${NOTIFICATION_SERVICE_NAME}
+    ports:
+      - "${NOTIFICATION_SERVICE_PORT}:${NOTIFICATION_SERVICE_PORT}"
+    environment:
+      PORT: ${NOTIFICATION_SERVICE_PORT}
+      SERVICE_NAME: ${NOTIFICATION_SERVICE_NAME}
+    networks:
+      - watchtower-net
+    logging:
+      driver: json-file
+
+networks:
+  watchtower-net:
+    driver: bridge
