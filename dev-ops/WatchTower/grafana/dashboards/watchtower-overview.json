@@ -65,6 +65,27 @@
         },
         "overrides": []
       }
+    },
+    {
+    "id": 4,
+    "title": "Service Uptime Percentage (24h)",
+    "type": "timeseries",
+    "gridPos": { "h": 8, "w": 24, "x": 0, "y": 22 },
+    "targets": [
+      {
+        "expr": "avg_over_time(up[24h]) * 100",
+        "legendFormat": "{{job}}",
+        "refId": "A"
+      }
+    ],
+    "fieldConfig": {
+      "defaults": {
+        "unit": "percent",
+        "min": 0,
+        "max": 100
+      },
+      "overrides": []
     }
+  }
   ]
 }
