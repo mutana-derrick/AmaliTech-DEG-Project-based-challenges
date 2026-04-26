@@ -41,6 +41,22 @@ services:
     logging:
       driver: json-file
 
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    container_name: prometheus
+    ports:
+      - "${PROMETHEUS_PORT}:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    depends_on:
+      - order-service
+      - tracking-service
+      - notification-service    
+    networks:
+      - watchtower-net  
+
 networks:
   watchtower-net:
     driver: bridge
