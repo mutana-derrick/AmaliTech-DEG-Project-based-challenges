@@ -31,21 +31,16 @@ Services → Prometheus → Grafana → Alerts
 
 ## Architecture Diagram
 
-```
-Internet
-   │
-   ▼
-[Services]
-(order, tracking, notification)
-   │
-   ▼
-[Prometheus]
-   │
-   ▼
-[Grafana Dashboard]
-   │
-   ▼
-[Alerts]
+```mermaid
+graph TD
+    A[Order Service] -->|Metrics| P[Prometheus]
+    B[Tracking Service] -->|Metrics| P
+    C[Notification Service] -->|Metrics| P
+
+    P -->|Data Source| G[Grafana Dashboard]
+    G -->|Visualisation| U[User]
+
+    P -->|Alert Rules| AL[Alerts]
 ```
 
 ---
